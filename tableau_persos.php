@@ -7,8 +7,9 @@ $persoDatas = [
     2 => new Personnages(
         'Speedy', 'speedy.jpg', 3, 6, 10, 22, 0, 8, 1,2 
     ),
-
-
+    3 => new Personnages(
+        'Luka', 'speedy.jpg', 3, 6, 10, 22, 0, 8, 1,2 
+    ),
 ];
 
 
