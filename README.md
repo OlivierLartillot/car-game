@@ -1,2 +1,2 @@
 # car-game
-simple board games with cars
+simple board game with cars
