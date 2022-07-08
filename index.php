@@ -1,3 +1,18 @@
+<?php 
+	//!!! Explications à déplacer vers Markdown
+	//!!! améliorer les <br> en créant un fichier css
+	// en attendant une table sql je rentre mes infos dans des tableaux php
+
+	// les personnages et leur attributs / capacités
+	require_once "tableau_persos.php";
+	// les couleurs des véhicules. Pour ajouter un véhicules:
+	// créer une copie inversé de l'image et enregistrer les sous pour une nouvelle voiture noire:
+	// 1. noire_vers_droite.png et noire_vers_gauche.png
+	// 2. copier les images dans le dossier assets/images/img_marqueurs/
+	// 3. ajouter la couleur dans le tableau => $carsColors = ["rouge","bleue","rose", "noire"];
+	require_once "tableau_couleurs_voitures.php";		
+?> 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,47 +24,35 @@
 <body>
     <h1>Préparez vous pour la course</h1>
 	<form method="post" action="test_d.php">
-		<fieldset>
-			<legend>JOUEUR 1 :</legend>
-				<label for="nomJ1">Nom :</label><input type="text" name="nomJ1" id="nomJ1"/><br/><br/>
+		<!-- pour construire les formulaires J1 et J2 -->
+		<?php for ($i=1;$i<3;$i++): ?>
+			<!-- Différencier les id/label dans les radios -->
+			<?php $idJoueur = ($i == 1) ? "a" : "b"; ?>
 
-				<?php 
-					// en attendant une table sql je rentre mes infos dans un tableau php
-					require_once "tableau_persos.php";
-					require_once "tableau_couleurs_voitures.php";		
-				?> 
+			<fieldset>
+				<legend>JOUEUR <?= $i ?> :</legend>
+					<label for="nomJ<?= $i ?>">Nom :</label><input type="text" name="nomJ<?= $i ?>" id="nomJ<?= $i ?>"/><br/><br/>
 
-			<legend>Choissisez perso :</legend><br/>
+				<legend>Choissisez le perso :</legend><br/>
 
-			<?php foreach ($persoDatas as $key => $currentPersonnage) : ?>
-				<input type="radio" id="perso<?= $key ?>" name="persoj1" value="<?= $currentPersonnage->name  ?>">
-				<label for="perso<?= $key ?>">
-					Nom : <?= $currentPersonnage->name  ?> / vitesse max : <?= $currentPersonnage->vitesseMaximum  ?>  / force max : <?= $currentPersonnage->forceMaximum  ?> <br/>
-				</label>
-			<?php endforeach; ?>
-			
-			<legend>Choississez véhicule</legend>
-			<?php foreach ($carsColors as $currentColor) : ?>
-				<input type="radio" id="<?= $currentColor ?>" name="v1" value="<?= $currentColor ?>">
-				<label for="<?= $currentColor ?>"><img src="assets/images/img_marqueurs/<?= $currentColor ?>_vers_droite.png" alt="Voiture <?= $currentColor ?>" height="30px"/></label>
-			<?php endforeach; ?>
-		</fieldset>
+				<!-- récupère tous les persos pour la sélection dans un radio -->
+				<?php foreach ($persoDatas as $key => $currentPersonnage) : ?>
+					<input type="radio" id="perso<?= $key . $idJoueur ?>" name="persoj<?= $i ?>" value="<?= $currentPersonnage->name  ?>">
+					<label for="perso<?= $key . $idJoueur ?>">
+						<?= $currentPersonnage->name  ?> / vitesse max : <?= $currentPersonnage->vitesseMaximum  ?>  / force max : <?= $currentPersonnage->forceMaximum  ?> <br/>
+					</label>
+				<?php endforeach; ?>
+				<br/>
+				<!-- Récupère toutes les couleurs de véhicules pour la sélection dans un radio-->
+				<legend>Choississez véhicule</legend>
+				<?php foreach ($carsColors as $currentColor) : ?>
+					<input type="radio" id="<?= $currentColor . $idJoueur ?>" name="v<?= $i ?>" value="<?= $currentColor ?>">
+					<label for="<?= $currentColor . $idJoueur?>"><img src="assets/images/img_marqueurs/<?= $currentColor ?>_vers_droite.png" alt="Voiture <?= $currentColor ?>" height="30px"/></label>
+				<?php endforeach; ?>
+			</fieldset>
+		<?php endfor; ?>
 		
-		<fieldset>
-			<legend>JOUEUR 2 :</legend>
-				<label for="nomJ2">Joueur2</label><input type="text" name="nomJ2" id="nomJ2"/><br/>
-			
-			<legend>Choissisez perso :</legend><br/>
-				<input type="radio" id="perso1b" name="persoj2" value="speedy"><label for="perso1b"><img src="personnages/images/speedy.jpg" alt="speedy" height="200px"/></label>
-				<input type="radio" id="perso2b" name="persoj2" value="morse"><label for="perso2b"><img src="personnages/images/morse.jpg" alt="morse" height="200px"/></label><br/>
-			
-			<legend>Choississez véhicule</legend>
-				<input type="radio" id="Vrougeb" name="v2" value="rouge"><label for="Vrougeb"><img src="assets/images/img_marqueurs/rouge_vers_droite.png" alt="Voiture rouge" height="30px"/></label>
-				<input type="radio" id="Vbleueb" name="v2" value="bleue"><label for="Vbleueb"><img src="assets/images/img_marqueurs/bleue_vers_droite.png" alt="Voiture bleue" height="30px"/></label>
-				<input type="radio" id="Vroseb" name="v2" value="rose"><label for="Vroseb"><img src="assets/images/img_marqueurs/rose_vers_droite.png" alt="Voiture rose" height="30px"/></label>
-		</fieldset>
-	
-	<input type="submit" name="parametresDeJeu"/>
+			<input type="submit" name="parametresDeJeu"/>
 	</form>
 
 </body>
