@@ -5,11 +5,7 @@
 
 	// les personnages et leur attributs / capacités
 	require_once "tableau_persos.php";
-	// les couleurs des véhicules. Pour ajouter un véhicules:
-	// créer une copie inversé de l'image et enregistrer les sous pour une nouvelle voiture noire:
-	// 1. noire_vers_droite.png et noire_vers_gauche.png
-	// 2. copier les images dans le dossier assets/images/img_marqueurs/
-	// 3. ajouter la couleur dans le tableau => $carsColors = ["rouge","bleue","rose", "noire"];
+
 	require_once "tableau_couleurs_voitures.php";		
 ?> 
 
