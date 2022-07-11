@@ -1,0 +1,92 @@
+body {
+    font-family: 'Racing Sans One', cursive, Arial, Helvetica, sans-serif;
+    font-size: 1.2em;
+    background-color: #EEEEEE;;
+}
+#title_page{
+    display: flex;
+    justify-content: center;
+    background-color: #F15412;
+    margin-bottom: 0.8em;
+    border: 1px #34B3F1 solid;
+    border-radius: 10px;
+}
+
+h1 {
+    font-size: 1.5em;
+    text-align: center;
+    vertical-align: middle;
+}
+
+legend {
+    font-size: 1.5em;
+}
+
+.choose_player_form{
+    background-color: #34B3F1;
+    padding: 0.5em;
+    text-align: center;
+    border-radius: 10px
+}
+
+.player_number {
+    background-color: #F15412;
+    color: #EEEEEE;
+    border: 1px black solid;
+    padding: 0.5em;
+    margin-bottom: 1em;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.choose_player__board__container{
+    margin-bottom: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-around;
+}
+
+.choose_player__board{
+    background-color: #EEEEEE;
+    width: 90%;
+    margin-top: 1em;
+    text-align: left;
+    border-radius: 10px;
+    border: 1px black solid;
+}
+
+@media screen and (min-width: 769px)
+{
+    .choose_player__board{
+        width: 35%;
+        padding: 1em 3em;
+        text-align: left;
+    }
+}
+
+.radio_personnages {
+    text-align: left;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+input:checked + label {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #34B3F1;
+    border: 1px #F15412 solid;
+    font-weight: bold;
+    margin: 1em;
+    padding: 0.4em;
+    line-height: 2em;
+    border-radius: 10px;
+  }
+
+
+.choose_player_form>input[type="submit"] {
+    width: 20%;
+    background-color: #EEEEEE;
+    text-align: center;
+    padding: 0.4em;
+    font-size: 1.1em;
+}
