@@ -13,7 +13,8 @@ require_once "../datas/tableau_couleurs_voitures.php";
     $lastArrayKey = array_key_last($persoDatas);
 
 
-// nettoie et enregistre les données recues du formulaire
+// nettoie et enregistre les données recues du formulaire:
+
 // Infos J1 + filter php
     $nomJ1 =(filter_var($_POST["nomJ1"],  FILTER_SANITIZE_FULL_SPECIAL_CHARS));
     $idPersoJ1 = (filter_var($_POST["persoJ1"],  FILTER_SANITIZE_NUMBER_INT));
@@ -42,21 +43,13 @@ require_once "../datas/tableau_couleurs_voitures.php";
         }
 
     // si tout est bon on peut charger la page de course, 
+    
+    require_once "../game.php";
+
     // récupérer les données des persos choisis
     // et passer le relai au js pour la course
 
-
-
-
-
-
-
 require_once "../datas/tableau_persos.php";
-
-
-
-
-
 
 //récupère l'id du perso
 foreach ($persoDatas[$idPersoJ1] as $currentObjectProperty) {

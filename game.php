@@ -1,12 +1,10 @@
-
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="assets/style.css">
+	<link rel="stylesheet" href="../assets/style.css">
     <title>Plateau de jeu - car-game</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,18 +14,28 @@
 <body>
     <div id="plateauDeJeu">
         <div class="titleH1">
-            <img src="./assets/images/chequered-flag-icon.svg" alt="drapeau à damier" width="50"> 
+            <img src="../assets/images/chequered-flag-icon.svg" alt="drapeau à damier" width="50"> 
             <h1>Course en cours</h1>
-            <img src="./assets/images/chequered-flag-icon.svg" alt="drapeau à damier" width="50">
+            <img src="../assets/images/chequered-flag-icon.svg" alt="drapeau à damier" width="50">
         </div>
         <div class="panneau_de_jeu">
             <div class="ingame_players_board">
                 <?php for($i=1; $i<3; $i++) :?>
                     <div class="player">
-                        <h2 id="player<?= $i ?>Name"></h2>
+                        <h2 id="player<?= $i ?>Name"><?= ${'nomJ'.$i} ?></h2>
                         <ul class="payerUl">
-                            <li id="player<?= $i ?>NomPerso"></li>
-                            <li id="player<?= $i ?>Voiture"></li>
+                            <li id="player<?= $i ?>NomPerso"><?= $persoDatas[${'idPersoJ'.$i}]->name ?></li>
+                            <li id="player<?= $i ?>Voiture"> <img src="../assets/images/img_marqueurs/<?= ${'couleurVehiculeJ'.$i} ?>_vers_droite.png" alt="Voiture <?= ${'couleurVehiculeJ'.$i} ?>" height="30px"/></li>
+                            <li id="player<?= $i ?>qualite"><?= $persoDatas[${'idPersoJ'.$i}]->qualite ?></li>
+                            <li id="player<?= $i ?>vitesseMinimum"><?= $persoDatas[${'idPersoJ'.$i}]->vitesseMinimum ?></li>
+                            <li id="player<?= $i ?>vitesseMaximum"><?= $persoDatas[${'idPersoJ'.$i}]->vitesseMaximum ?></li>
+                            <li id="player<?= $i ?>forceMinimum"><?= $persoDatas[${'idPersoJ'.$i}]->forceMinimum ?></li>
+                            <li id="player<?= $i ?>forceMaximum"><?= $persoDatas[${'idPersoJ'.$i}]->forceMaximum ?></li>
+                            <li id="player<?= $i ?>forceMaximum"><?= $persoDatas[${'idPersoJ'.$i}]->fatigueApresFrappeMinimum ?></li>
+                            <li id="player<?= $i ?>forceMaximum"><?= $persoDatas[${'idPersoJ'.$i}]->fatigueApresFrappeMaximum ?></li>
+                            <li id="player<?= $i ?>forceMaximum"><?= $persoDatas[${'idPersoJ'.$i}]->deApresFrappeMinimum ?></li>
+                            <li id="player<?= $i ?>forceMaximum"><?= $persoDatas[${'idPersoJ'.$i}]->deApresFrappeMaximum ?></li>
+
                         </ul>
                     </div>
                 <?php endfor; ?>

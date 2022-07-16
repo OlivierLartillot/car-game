@@ -28,7 +28,6 @@ class Personnages
         $this->fatigueApresFrappeMinimum = $fatigueApresFrappeMinimum;
         $this->fatigueApresFrappeMaximum = $fatigueApresFrappeMaximum;
         $this->deApresFrappeMinimum = $deApresFrappeMinimum;
-        $this->deApresFrappeMinimum = $deApresFrappeMinimum;
         $this->deApresFrappeMaximum = $deApresFrappeMaximum;
     }
 
