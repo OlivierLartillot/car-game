@@ -31,10 +31,10 @@
                             <li id="player<?= $i ?>vitesseMaximum"><?= $persoDatas[${'idPersoJ'.$i}]->vitesseMaximum ?></li>
                             <li id="player<?= $i ?>forceMinimum"><?= $persoDatas[${'idPersoJ'.$i}]->forceMinimum ?></li>
                             <li id="player<?= $i ?>forceMaximum"><?= $persoDatas[${'idPersoJ'.$i}]->forceMaximum ?></li>
-                            <li id="player<?= $i ?>forceMaximum"><?= $persoDatas[${'idPersoJ'.$i}]->fatigueApresFrappeMinimum ?></li>
-                            <li id="player<?= $i ?>forceMaximum"><?= $persoDatas[${'idPersoJ'.$i}]->fatigueApresFrappeMaximum ?></li>
-                            <li id="player<?= $i ?>forceMaximum"><?= $persoDatas[${'idPersoJ'.$i}]->deApresFrappeMinimum ?></li>
-                            <li id="player<?= $i ?>forceMaximum"><?= $persoDatas[${'idPersoJ'.$i}]->deApresFrappeMaximum ?></li>
+                            <li id="player<?= $i ?>fatigueApresFrappeMinimum"><?= $persoDatas[${'idPersoJ'.$i}]->fatigueApresFrappeMinimum ?></li>
+                            <li id="player<?= $i ?>fatigueApresFrappeMaximum"><?= $persoDatas[${'idPersoJ'.$i}]->fatigueApresFrappeMaximum ?></li>
+                            <li id="player<?= $i ?>deApresFrappeMinimum"><?= $persoDatas[${'idPersoJ'.$i}]->deApresFrappeMinimum ?></li>
+                            <li id="player<?= $i ?>deApresFrappeMaximum"><?= $persoDatas[${'idPersoJ'.$i}]->deApresFrappeMaximum ?></li>
 
                         </ul>
                     </div>

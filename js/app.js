@@ -16,8 +16,8 @@ const app = {
         let erreurNameJ2 = document.querySelector('#erreurNameJ2');
         erreurNameJ1.innerHTML = "";
         erreurNameJ2.innerHTML = "";
-        let persoJ1 = document.querySelector('input[name=persoj1]:checked').value;
-        let persoJ2 = document.querySelector('input[name=persoj2]:checked').value;
+        let persoJ1 = document.querySelector('input[name=persoJ1]:checked').value;
+        let persoJ2 = document.querySelector('input[name=persoJ2]:checked').value;
         let vJ1 = document.querySelector('input[name=v1]:checked').value;
         let vJ2 = document.querySelector('input[name=v2]:checked').value; 
       
