@@ -1,5 +1,5 @@
 <?php
-require_once "./Classes/Personnages.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/car-game/Classes/Personnages.php";
 $persoDatas = [
     1 => new Personnages(
         'Morse', 'Tank', 'morse.jpg', 2, 6, 15, 30, 2,12, 1,3 
