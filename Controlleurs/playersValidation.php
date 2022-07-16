@@ -1,31 +1,47 @@
 <?php 
+require_once "../datas/tableau_persos.php";
+require_once "../datas/tableau_couleurs_voitures.php";
 
-// Si les infos n'arrivent pas par un submit 
+
+// Si les infos n'arrivent pas par un submit
+// informations don't come from the submit button 
   if (!isset($_POST['soumissionParametresDeJeu'])) {
     header('Location: ../index.php');
   };
 
-  // Infos J1
-$nomJ1 =(filter_var($_POST["nomJ1"],  FILTER_SANITIZE_FULL_SPECIAL_CHARS));
-$idPersoJ1 = (filter_var($_POST["persoJ1"],  FILTER_SANITIZE_NUMBER_INT));
-echo 'nomJ1' . $nomJ1;
+// le dernier id du tableau
+    $lastArrayKey = array_key_last($persoDatas);
 
 
+// nettoie et enregistre les données recues du formulaire
+// Infos J1 + filter php
+    $nomJ1 =(filter_var($_POST["nomJ1"],  FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+    $idPersoJ1 = (filter_var($_POST["persoJ1"],  FILTER_SANITIZE_NUMBER_INT));
+    $couleurVehiculeJ1 =(filter_var($_POST["couleurVehiculeJ1"],  FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 
-// Infos J2
-$nomJ2 =(filter_var($_POST["nomJ2"],  FILTER_SANITIZE_FULL_SPECIAL_CHARS));
-$idPersoJ2 = (filter_var($_POST["persoJ2"],  FILTER_SANITIZE_NUMBER_INT));
-echo 'nomJ2' . $nomJ2;
+  echo 'l id du perso 1 est : ' . $idPersoJ1;
 
-// test, nettoie et enregistre les données recues du formulaire
-    // problème on revient sur la page en affichant une erreur
+// Infos J2 +filter php
+    $nomJ2 =(filter_var($_POST["nomJ2"],  FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+    $idPersoJ2 = (filter_var($_POST["persoJ2"],  FILTER_SANITIZE_NUMBER_INT));
+    $couleurVehiculeJ2 =(filter_var($_POST["couleurVehiculeJ2"],  FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+
+
+// tests 
     $error = false;
-   if ((strlen($_POST["nomJ1"]) < 3) || (strlen($_POST["nomJ2"]) < 3)) { $error = true;}
+    // problème on revient sur la page 
+        // le nom doit comporter au moins 3 caractères
+            if (($nomJ1 < 3) || ($nomJ2 < 3)) { $error = true;}
+        // l'id doit etre entre 1 et lastArrayKey
+            if ((($idPersoJ1 < 1) || ($idPersoJ1 > $lastArrayKey)) || (($idPersoJ2 < 1) || ($idPersoJ2 > $lastArrayKey))) { $error = true;}
+        // la couleur recue doit être dans le tableau
+            if ((!in_array($couleurVehiculeJ1, $carsColors )) || (!in_array($couleurVehiculeJ2, $carsColors )))   { $error = true;}
 
-
-  if ($error === true) {
-    echo 'si erreur = true oon peut rediriger';
-  }
+        // if there is an error we do a redirection to the choice players page
+        if ($error === true) {
+            echo 'si erreur = true oon peut rediriger';
+            exit();
+        }
 
     // si tout est bon on peut charger la page de course, 
     // récupérer les données des persos choisis
