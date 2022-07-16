@@ -4,8 +4,9 @@ const app = {
         console.log('l\'app est bien initialisée !');
 
         // le submit du formulaire
-        let submitForm = document.querySelector('.choose_player_form');
-        submitForm.addEventListener('submit', app.handleSubmitPlayers);
+        let checkForm = document.querySelector('.choose_player_form');
+        
+        checkForm.addEventListener('submit', app.handleSubmitPlayers);
 
     },
 
@@ -18,14 +19,16 @@ const app = {
         erreurNameJ2.innerHTML = "";
         let persoJ1 = document.querySelector('input[name=persoJ1]:checked').value;
         let persoJ2 = document.querySelector('input[name=persoJ2]:checked').value;
-        let vJ1 = document.querySelector('input[name=v1]:checked').value;
-        let vJ2 = document.querySelector('input[name=v2]:checked').value; 
+        let vJ1 = document.querySelector('input[name=couleurVehiculeJ1]:checked').value;
+        let vJ2 = document.querySelector('input[name=couleurVehiculeJ2]:checked').value; 
       
-        if (nomJ1 == "") {
+        console.log(nomJ1.length)
+
+        if (nomJ1.length < 3) {
             return "false j1";
         }
 
-        if (nomJ2 == "") {
+        if (nomJ2.length < 3) {
             return "false j2";
         }
 
@@ -38,36 +41,30 @@ const app = {
     },
 
     handleSubmitPlayers: function (evt) {
-        evt.preventDefault();
+
+        
+        let error = false;
         console.log('Tu as cliqué sur le submit');
 
         // test les erreurs eventuelles 
        let checkResult = app.checkErrors();
        
         if (checkResult === "false j1") {
-            return document.querySelector('#erreurNameJ1').innerHTML = "Tu n'as pas rempli le nom du joueur";
+            error = true 
+            document.querySelector('#erreurNameJ1').innerHTML = "Le nom du joueur doit comporter au moins 3 lettres";
+            // return document.querySelector('#erreurNameJ1').innerHTML = "Tu n'as pas rempli le nom du joueur";
         }
         else if (checkResult === "false j2") {
-            return document.querySelector('#erreurNameJ2').innerHTML = "Tu n'as pas rempli le nom du joueur";
+            error = true
+            document.querySelector('#erreurNameJ2').innerHTML = "Le nom du joueur doit comporter au moins 3 lettres";
         }
+      
+        if (error == true) {
+          evt.preventDefault();  
+        }
+       
 
-        //console.log(checkResult[0]);
-
-        document.querySelector('#preparation_course').style.display = "none";
-        document.querySelector('#course').style.display = "block";
-
-        // si tout est bon tu retourne le tableau qui contient toutes les infos
-        // voir si un tableau avec deux d objet ?
-        let arrayInfos = [
-            checkResult[0],
-            checkResult[1]
-        ]
-
-        app.writePlayersInfos(arrayInfos[0].pseudo,arrayInfos[0].perso,arrayInfos[0].vehicule, arrayInfos[1].pseudo,arrayInfos[1].perso,arrayInfos[1].vehicule, );
-
-        run.init(arrayInfos);
-
-        return arrayInfos;
+        
        
     },
 

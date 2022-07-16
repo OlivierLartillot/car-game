@@ -29,7 +29,7 @@
 			<img src="./assets/images/chequered-flag-icon.svg" alt="drapeau à damier" width="50">
 		</div>
 
-		<form class="choose_player_form" method="post" action="./Controlleurs/playersValidation.php">
+		<form class="choose_player_form" name="myForm" method="post" action="./Controlleurs/playersValidation.php">
 			<div class="choose_player__board__container">
 			<!-- pour construire les formulaires J1 et J2 -->
 			<?php for ($i=1;$i<3;$i++): ?>
@@ -63,8 +63,7 @@
 					</fieldset>
 			<?php endfor; ?>
 			</div>
-
-			<input type="submit" id="submit_form" name="soumissionParametresDeJeu" value="Commencer la partie">
+			<input type="submit" id="submit_form" name="soumissionParametresDeJeu" value="Commencer la partie"/>
 		</form>
 	</div>	
 			
