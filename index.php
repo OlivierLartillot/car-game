@@ -39,9 +39,9 @@
 					<fieldset class="choose_player__board">
 						<legend class="player_number">JOUEUR <?= $i ?> :</legend>
 							<label for="nomJ<?= $i ?>">Nom :</label>
-							<input type="text" name="nomJ<?= $i ?>" id="nomJ<?= $i ?>" required="required"/><br/>
+							<input type="text" name="nomJ<?= $i ?>" id="nomJ<?= $i ?>" required="required" minlength="3"/><br/>
 							<div id="erreurNameJ<?= $i ?>"></div>
-						<legend>Choissisez le perso :</legend><br/>
+						<legend class="legend_choix_perso">Choissisez le perso :</legend><br/>
 						<div class="radio_personnages">
 							<!-- récupère tous les personnages pour la sélection dans un radio -->
 							<?php foreach ($persoDatas as $key => $currentPersonnage) : ?>
@@ -55,10 +55,10 @@
 
 						<br/>
 						<!-- Récupère toutes les couleurs des véhicules pour la sélection dans un radio-->
-						<legend>Choississez votre véhicule :</legend>
+						<legend class="legend_choix_vehicule">Choississez votre véhicule :</legend>
 						<?php foreach ($carsColors as $currentColor) : ?>
 							<input required="required" type="radio" id="<?= $currentColor . $idJoueur ?>" name="couleurVehiculeJ<?= $i ?>" value="<?= $currentColor ?>">
-							<label for="<?= $currentColor . $idJoueur?>"><img src="assets/images/img_marqueurs/<?= $currentColor ?>_vers_droite.png" alt="Voiture <?= $currentColor ?>" height="30px"/></label>
+							<label class="labelVehicule" for="<?= $currentColor . $idJoueur?>"><img src="assets/images/img_marqueurs/<?= $currentColor ?>_vers_droite.png" alt="Voiture <?= $currentColor ?>" height="30px"/></label>
 						<?php endforeach; ?>
 					</fieldset>
 			<?php endfor; ?>

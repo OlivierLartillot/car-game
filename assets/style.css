@@ -21,6 +21,12 @@ h1 {
 legend {
     font-size: 1.5em;
 }
+.legend_choix_perso {
+    padding-top: 1em;
+}
+.legend_choix_vehicule {
+    margin-bottom: 0.81em;
+}
 
 .choose_player_form{
     background-color: #34B3F1;
@@ -67,10 +73,9 @@ legend {
     text-align: left;
 }
 
-/* input[type="radio"] {
-    position: absolute;
-    left: -1000px;
-} */
+input[type="radio"] {
+    display: none;
+}
 
 input:checked + label {
     font-family: Arial, Helvetica, sans-serif;
@@ -81,8 +86,20 @@ input:checked + label {
     padding: 0.4em;
     line-height: 2em;
     border-radius: 10px;
-  }
+    background-color: yellow;
+}
 
+label:hover{
+    background-color: yellow;  
+}
+
+.labelVehicule:hover {
+padding-top: 1em;
+}
+
+input:checked + .labelVehicule {
+padding-top: 1em;
+} 
 
 .choose_player_form>input[type="submit"] {
     

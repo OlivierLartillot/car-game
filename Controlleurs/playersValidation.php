@@ -19,8 +19,6 @@ require_once "../datas/tableau_couleurs_voitures.php";
     $idPersoJ1 = (filter_var($_POST["persoJ1"],  FILTER_SANITIZE_NUMBER_INT));
     $couleurVehiculeJ1 =(filter_var($_POST["couleurVehiculeJ1"],  FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 
-  echo 'l id du perso 1 est : ' . $idPersoJ1;
-
 // Infos J2 +filter php
     $nomJ2 =(filter_var($_POST["nomJ2"],  FILTER_SANITIZE_FULL_SPECIAL_CHARS));
     $idPersoJ2 = (filter_var($_POST["persoJ2"],  FILTER_SANITIZE_NUMBER_INT));
@@ -31,7 +29,7 @@ require_once "../datas/tableau_couleurs_voitures.php";
     $error = false;
     // problème on revient sur la page 
         // le nom doit comporter au moins 3 caractères
-            if (($nomJ1 < 3) || ($nomJ2 < 3)) { $error = true;}
+            if ((strlen($nomJ1) < 3) || (strlen($nomJ2) < 3)) { $error = true;}
         // l'id doit etre entre 1 et lastArrayKey
             if ((($idPersoJ1 < 1) || ($idPersoJ1 > $lastArrayKey)) || (($idPersoJ2 < 1) || ($idPersoJ2 > $lastArrayKey))) { $error = true;}
         // la couleur recue doit être dans le tableau
@@ -39,7 +37,7 @@ require_once "../datas/tableau_couleurs_voitures.php";
 
         // if there is an error we do a redirection to the choice players page
         if ($error === true) {
-            echo 'si erreur = true oon peut rediriger';
+            header('Location: ../index.php');
             exit();
         }
 
