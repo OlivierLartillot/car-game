@@ -4,6 +4,14 @@ body {
     background-color: #EEEEEE;
    
 }
+
+@media screen and (min-width: 1023px)
+{
+    body {
+        font-size: 1.2em;
+    }
+}
+
 .titleH1{
     display: flex;
     justify-content: center;
@@ -61,11 +69,12 @@ legend {
     border: 1px black solid;
 }
 
+
+
+
 @media screen and (min-width: 769px)
 {
-    body {
-        font-size: 1.2em;
-    }
+
     .choose_player__board{
         width: 35%;
         padding: 1em 3em;

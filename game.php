@@ -9,7 +9,7 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap" rel="stylesheet">
-	<script src="./js/app.js" defer></script>
+	<script src="../js/run.js" defer></script>
 </head>
 <body>
     <div id="plateauDeJeu">
@@ -25,7 +25,7 @@
                         <h2 id="player<?= $i ?>Name"><?= ${'nomJ'.$i} ?></h2>
                         <ul class="payerUl">
                             <li id="player<?= $i ?>NomPerso"><?= $persoDatas[${'idPersoJ'.$i}]->name ?></li>
-                            <li id="player<?= $i ?>Voiture"> <img src="../assets/images/img_marqueurs/<?= ${'couleurVehiculeJ'.$i} ?>_vers_droite.png" alt="Voiture <?= ${'couleurVehiculeJ'.$i} ?>" height="30px"/></li>
+                            <li id="player<?= $i ?>Voiture" title="<?= ${'couleurVehiculeJ'.$i} ?>"> <img src="../assets/images/img_marqueurs/<?= ${'couleurVehiculeJ'.$i} ?>_vers_droite.png" alt="Voiture <?= ${'couleurVehiculeJ'.$i} ?>" height="30px"/></li>
                             <li id="player<?= $i ?>qualite"><?= $persoDatas[${'idPersoJ'.$i}]->qualite ?></li>
                             <li id="player<?= $i ?>vitesseMinimum"><?= $persoDatas[${'idPersoJ'.$i}]->vitesseMinimum ?></li>
                             <li id="player<?= $i ?>vitesseMaximum"><?= $persoDatas[${'idPersoJ'.$i}]->vitesseMaximum ?></li>
