@@ -40,7 +40,7 @@
                     </div>
                 <?php endfor; ?>
                 <div id="dice">
-                    <form action="#" method="post" id=the_dice>
+                    <form action="#" method="post" id="the_dice">
                         <label>Lancer le dé</label>
                         <input type="submit" value="lancer le dé" />
                     </form>
