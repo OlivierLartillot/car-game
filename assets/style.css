@@ -1,7 +1,8 @@
 body {
     font-family: 'Racing Sans One', cursive, Arial, Helvetica, sans-serif;
-    font-size: 1.2em;
-    background-color: #EEEEEE;;
+    font-size: 0.8em;
+    background-color: #EEEEEE;
+   
 }
 .titleH1{
     display: flex;
@@ -62,11 +63,15 @@ legend {
 
 @media screen and (min-width: 769px)
 {
+    body {
+        font-size: 1.2em;
+    }
     .choose_player__board{
         width: 35%;
         padding: 1em 3em;
         text-align: left;
     }
+
 }
 
 .radio_personnages {
