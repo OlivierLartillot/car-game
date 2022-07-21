@@ -3,29 +3,24 @@ const run = {
 
     casePlayer : [0 ,0],
     quelJoueurJoue: 1,
+    indicePlayer1: 0,
+    indicePlayer2: 1,
 
     
     init: function () {
         console.log('le run js est lancé');
-        console.log('le player 1 est sur la case ' + run.casePlayer1);
+        console.log('le player 1 est sur la case ' + run.casePlayer[run.indicePlayer1]);
+        
+        // chargement des infos de chaque joueur
+        let player1 = run.infosJoueur(1)
+        let player2 = run.infosJoueur(2)
+
+        // place les voitures sur la case départ (0)
+        run.caseActuelle( player1.couleurVoiture,player2.couleurVoiture)
 
 
-        /* let nomPersoJ1 = array[0].perso;
-        console.log('le perso choisi par le J1 est ' + nomPersoJ1)
-
-        let casedepart = document.querySelector('#case0');
-        let vehiculeJ1 = array[0].vehicule;
-        let vehiculeJ2 = array[1].vehicule; 
-        casedepart.innerHTML = '<img src="./assets/images/img_marqueurs/'+vehiculeJ1+'_vers_droite.png" alt="Voiture '+vehiculeJ1+'" height="30px"/><img src="./assets/images/img_marqueurs/'+vehiculeJ2+'_vers_droite.png" alt="Voiture '+vehiculeJ2+'" height="30px"/>';
-       */ 
-
-
-       let J1 = run.infosJoueur(1)
-       let J2 = run.infosJoueur(2)
-
-       // run.caseDepart(J1.couleurVoiture, J2.couleurVoiture)
-         let theDice = document.querySelector('#the_dice');
-      theDice.addEventListener('submit', run.handleDice);
+        let theDice = document.querySelector('#the_dice');
+        theDice.addEventListener('submit', run.handleDice);
     },
 
     infosJoueur:function(idJoueur) {
@@ -60,13 +55,33 @@ const run = {
 
 
 
-    caseDepart: function(couleurVoitureJ1, couleurVoitureJ2) {
+    caseActuelle: function(couleurVoitureJ1, couleurVoitureJ2,quelJoueur) {
 
-        const casedepart = document.querySelector('#case0');
-        const imgVoitureJ1 = '<img src="../assets/images/img_marqueurs/'+couleurVoitureJ1+'_vers_droite.png" alt="Voiture '+couleurVoitureJ1+'" height="30px"/>';
-        const imgVoitureJ2 = '<img src="../assets/images/img_marqueurs/'+couleurVoitureJ2+'_vers_droite.png" alt="Voiture '+couleurVoitureJ2+'" height="30px"/>';
+        
+       if (quelJoueur === 1){
+            console.log('c est le joueur 1 qui est entrain de jouer')
+            return run.casePlayer[0]
 
-        casedepart.innerHTML = imgVoitureJ1 + imgVoitureJ2;
+        }
+
+        else if (quelJoueur === 2){
+            console.log('c est le joueur 2 qui est entrain de jouer')
+            return run.casePlayer[1]
+        }
+
+        else {
+                const casedepart = document.querySelector('#case'+run.casePlayer[0]);
+                const imgVoitureJ1 = '<img id="imgVoitureJ1" src="../assets/images/img_marqueurs/'+couleurVoitureJ1+'_vers_droite.png" alt="Voiture '+couleurVoitureJ1+'" height="30px"/>';
+                const imgVoitureJ2 = '<img id="imgVoitureJ2" src="../assets/images/img_marqueurs/'+couleurVoitureJ2+'_vers_droite.png" alt="Voiture '+couleurVoitureJ2+'" height="30px"/>';
+                casedepart.innerHTML = imgVoitureJ1 + imgVoitureJ2;
+            
+        }
+
+/*         if (quelJoueur) {
+            console.log('hourra tu nes pas nulll = ' + quelJoueur)
+        }
+        console.log(quelJoueur) */
+
  
 
 
@@ -80,18 +95,21 @@ const run = {
 
     handleDice: function (evt) {
         evt.preventDefault();
-
-        console.log('tour du joueur : ' + run.quelJoueurJoue);
+        
+        // le joueur courant qui est entrain de jouer
         let joueur = run.infosJoueur(run.quelJoueurJoue)
-        console.log(joueur.vitesseMin);
-       
-        // ! récupérer le perso qui joue pour connaitre son min et max au dé
+        console.log(joueur)
 
+        
+       
+        // ! lancer le dé en fonction de son min et max
         let diceResult = run.getRandomInt(joueur.vitesseMin,joueur.vitesseMax);
         console.log("le dé renvoie" + diceResult);
 
+
+        
         // ! appeler la fonction qui fait avancer le personnage
-        run.carMovement(diceResult, run.quelJoueurJoue)
+        run.carMovement(diceResult, run.quelJoueurJoue-1)
 
         // ! appeler la fonction qui compare si on est sur la meme case
 
@@ -102,17 +120,41 @@ const run = {
         run.quelJoueurJoue = run.quelJoueurJoue == 1 ?  run.quelJoueurJoue = 2 :  run.quelJoueurJoue = 1
     },
 
-    carMovement:function (diceResult, playerNumber) {
+    carMovement:function (diceResult, playerIndex) {
 
-        // récupère la case actuelle du joueur
-        let currentBox = run.casePlayer[0]
+        // numéro du joueur
+        playerNumber = playerIndex +1 
+
+        let currentBox = run.casePlayer[playerIndex]
+
+        // supprime la voiture avec l id playerNumber
+        let el = document.querySelector('#imgVoitureJ' +playerNumber).remove();
+
+
+        console.log('l ancienne case a supprimer et qui possède l id : imgVoitureJ' +playerNumber )
+
+
 
         console.log('la valeur est ' + currentBox);
         // ajoute le dé
-        run.casePlayer[0] = currentBox + diceResult;
+        run.casePlayer[playerIndex] = currentBox + diceResult;
+
+
+        
         // fait bouger la voiture
-        console.log('la nouvelle case est : ' + run.casePlayer[0])
+        console.log('la nouvelle case est : ' + run.casePlayer[playerIndex])
+        const nouvelleCase = document.querySelector('#case'+run.casePlayer[playerIndex]);
+        const imgVoiture = '<img id="imgVoitureJ'+ playerNumber + '" src="../assets/images/img_marqueurs/'+run.infosJoueur(playerNumber).couleurVoiture+'_vers_droite.png" alt="Voiture '+run.infosJoueur(playerNumber).couleurVoiture+'" height="30px"/>';
+        nouvelleCase.innerHTML = imgVoiture;     
+        
+        // attrape l'ancienne case
         // annule la voiture dans l'ancienne case
+        //document.querySelector('#case'+currentBox).textContent = '0';
+        console.log('la case actuelle avant effacement est la ')
+
+
+        // attrape la nouvelle case 
+        // et affiches y la voiture
 
     }
 
