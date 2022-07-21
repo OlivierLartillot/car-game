@@ -144,9 +144,15 @@ const run = {
         // fait bouger la voiture
         console.log('la nouvelle case est : ' + run.casePlayer[playerIndex])
         const nouvelleCase = document.querySelector('#case'+run.casePlayer[playerIndex]);
-        const imgVoiture = '<img id="imgVoitureJ'+ playerNumber + '" src="../assets/images/img_marqueurs/'+run.infosJoueur(playerNumber).couleurVoiture+'_vers_droite.png" alt="Voiture '+run.infosJoueur(playerNumber).couleurVoiture+'" height="30px"/>';
-        nouvelleCase.innerHTML = imgVoiture;     
-        
+
+        const imgVoiture =  document.createElement('img')
+        imgVoiture.src = '../assets/images/img_marqueurs/' + run.infosJoueur(playerNumber).couleurVoiture+'_vers_droite.png'
+        imgVoiture.id = 'imgVoitureJ'+ playerNumber
+        imgVoiture.style.height = '30px'
+        nouvelleCase.appendChild(imgVoiture)
+/*         '<img id="imgVoitureJ'+ playerNumber + '" src="../assets/images/img_marqueurs/'+run.infosJoueur(playerNumber).couleurVoiture+'_vers_droite.png" alt="Voiture '+run.infosJoueur(playerNumber).couleurVoiture+'" height="30px"/>';
+     */    //nouvelleCase.appendChild(imgVoiture)   
+        console.log(nouvelleCase)
         // attrape l'ancienne case
         // annule la voiture dans l'ancienne case
         //document.querySelector('#case'+currentBox).textContent = '0';
