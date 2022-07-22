@@ -5,6 +5,7 @@ const run = {
     quelJoueurJoue: 1,
     indicePlayer1: 0,
     indicePlayer2: 1,
+    playersInfosLife : [100,100],
     
 
     
@@ -32,6 +33,14 @@ const run = {
         let viePerso = document.querySelector('#player'+ idJoueur +'vie').textContent
         let vMin = document.querySelector('#player'+ idJoueur +'vitesseMinimum').textContent
         let vMax = document.querySelector('#player'+ idJoueur +'vitesseMaximum').textContent
+
+        let vMin75 = document.querySelector('#player'+ idJoueur +'vitesseMinimum75').textContent
+        let vMax75 = document.querySelector('#player'+ idJoueur +'vitesseMaximum75').textContent
+        let vMin50 = document.querySelector('#player'+ idJoueur +'vitesseMinimum50').textContent
+        let vMax50 = document.querySelector('#player'+ idJoueur +'vitesseMaximum50').textContent
+        let vMin25 = document.querySelector('#player'+ idJoueur +'vitesseMinimum25').textContent
+        let vMax25 = document.querySelector('#player'+ idJoueur +'vitesseMaximum25').textContent
+
         let fMin = document.querySelector('#player'+ idJoueur +'forceMinimum').textContent
         let fMax = document.querySelector('#player'+ idJoueur +'forceMaximum').textContent
         let fafMin = document.querySelector('#player'+ idJoueur +'fatigueApresFrappeMinimum').textContent
@@ -45,6 +54,12 @@ const run = {
             "vie" : viePerso,
             "vitesseMin" : vMin,
             "vitesseMax" : vMax,
+            "vMin75" : vMin75,
+            "vMax75" : vMax75,
+            "vMin50" : vMin50,
+            "vMax50" : vMax50,
+            "vMin25" : vMin25,
+            "vMax25" : vMax25,
             "forceMin" : fMin,
             "forceMax" : fMax,
             "fatigueApresFrappeMinimum" : fafMin,
@@ -101,16 +116,52 @@ const run = {
         
         // le joueur courant qui est entrain de jouer
         let joueur = run.infosJoueur(run.quelJoueurJoue)
+        let playerNumber = run.quelJoueurJoue
+        let playerIndex = playerNumber - 1
+        let infosVie = run.playersInfosLife[playerIndex]
+
+        console.log(run.playersInfosLife)
         console.log('la vie dans le handleDice =>' + joueur.vie)
 
+        console.log('1. ton joueur a un dé min de ' + joueur.vitesseMin)
         //évalue la vie du joueur
-        // si < 75 et que le dé min > 0 => déMin-1
-
-        // si < 50 le dé max = -1
-
         // si < 25 et le dé min > 0 => déMin -1 et dé max -1
-        
+
+    console.log('le joueur a une vitessemin actuelle de ' + joueur.vMin50 )
+        if (joueur.vie <= 25) {
+            joueur.vitesseMin = joueur.vMin25
+            joueur.vitesseMax = joueur.vMax25
+                if (infosVie === 50) {
+                   alert(joueur.nomPerso + ' a moins de 25% de vie !') 
+                   run.playersInfosLife[playerIndex] = 25
+                }
+            
+        }
+        else if (joueur.vie <= 50) {
+            joueur.vitesseMin = joueur.vMin50
+            joueur.vitesseMax = joueur.vMax50
+            if (infosVie === 75) {
+                alert(joueur.nomPerso + ' a moins de 50% de vie !') 
+                run.playersInfosLife[playerIndex] = 50
+             }
+        }
+        else if (joueur.vie <= 75) {
+            joueur.vitesseMin = joueur.vMin75
+            joueur.vitesseMax = joueur.vMax75
+            if (infosVie === 100) {
+                alert(joueur.nomPerso + ' a moins de 75% de vie !') 
+                run.playersInfosLife[playerIndex] = 75
+             }
+
+        }
+        else {
+            joueur.vitesseMin = joueur.vitesseMin
+            joueur.vitesseMax =joueur.vitesseMax
+        }
        
+
+console.log ('l info vie est = a ' + infosVie)
+
         // ! lancer le dé en fonction de son min et max
         let diceResult = run.getRandomInt(joueur.vitesseMin,joueur.vitesseMax);
         console.log("le dé renvoie" + diceResult);
