@@ -168,6 +168,8 @@ const run = {
                 let forceDuCoupDonne = run.frapperAdversaire(run.infosJoueur(currentPlayer).forceMin, run.infosJoueur(currentPlayer).forceMax)
                 console.log('la force du coup est de ' + forceDuCoupDonne)
                 run.prendreDegats(run.infosJoueur(opponent), forceDuCoupDonne)
+                run.prendreFatigue(run.infosJoueur(currentPlayer), run.infosJoueur(currentPlayer).fatigueApresFrappeMinimum, run.infosJoueur(currentPlayer).fatigueApresFrappeMaximum)
+                run.prendreBonus(run.infosJoueur(currentPlayer), run.infosJoueur(currentPlayer).deApresFrappeMinimum, run.infosJoueur(currentPlayer).deApresFrappeMaximum, playerIndex)
             }
         
         }
@@ -179,21 +181,28 @@ const run = {
     },
 
     frapperAdversaire: function (frappeMin, frappeMax) {
-        let pointesDeFrappe = run.getRandomInt(frappeMin, frappeMax)
-        return pointesDeFrappe
+        let pointsDeFrappe = run.getRandomInt(frappeMin, frappeMax)
+        console.log('tu as frappé fort => ' + pointsDeFrappe )
+        return pointsDeFrappe
     },
 
     prendreDegats: function(joueur, degats) {
         let nouveauxPointsDeVie = joueur.vie - degats
+        console.log('les nouveaux points de vie de ' + joueur.nomPerso + ' sont = ' + nouveauxPointsDeVie )
        return nouveauxPointsDeVie
     },
 
-    prendreFatigue: function() {
-
+    prendreFatigue: function(joueur, fatigueMin, fatigueMax) {
+        let calculFatigue = run.getRandomInt(fatigueMin, fatigueMax)
+        let fatigueApresFrappe = joueur.vie - calculFatigue
+        console.log('les nouveaux points de vie de ' + joueur.nomPerso + ' sont = ' + fatigueApresFrappe )
+        return fatigueApresFrappe
     },
 
-    prendreBonus: function() {
-
+    prendreBonus: function(joueur, bonusFrappeMin, bonusFrappeMax, playerIndex) {
+        let calculBonus = run.getRandomInt(bonusFrappeMin, bonusFrappeMax)
+        //ajout du nombre de case
+        run.carMovement(calculBonus, playerIndex)
     }
 
 }
