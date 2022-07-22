@@ -28,20 +28,20 @@
                             <li id="player<?= $i ?>Voiture" title="<?= ${'couleurVehiculeJ'.$i} ?>"> <img src="../assets/images/img_marqueurs/<?= ${'couleurVehiculeJ'.$i} ?>_vers_droite.png" alt="Voiture <?= ${'couleurVehiculeJ'.$i} ?>" height="30px"/></li>
                             <li id="player<?= $i ?>qualite"><?= $persoDatas[${'idPersoJ'.$i}]->qualite ?></li>
                             <li id="player<?= $i ?>vie"><?= $persoDatas[${'idPersoJ'.$i}]->vie ?></li>
-                            <li id="player<?= $i ?>vitesseMinimum"><?= $persoDatas[${'idPersoJ'.$i}]->vitesseMinimum ?></li>
-                            <li id="player<?= $i ?>vitesseMaximum"><?= $persoDatas[${'idPersoJ'.$i}]->vitesseMaximum ?></li>
-                            <li id="player<?= $i ?>vitesseMinimum75"><?= $persoDatas[${'idPersoJ'.$i}]->vitesseMinimum75 ?></li>
-                            <li id="player<?= $i ?>vitesseMaximum75"><?= $persoDatas[${'idPersoJ'.$i}]->vitesseMaximum75 ?></li>
-                            <li id="player<?= $i ?>vitesseMinimum50"><?= $persoDatas[${'idPersoJ'.$i}]->vitesseMinimum50 ?></li>
-                            <li id="player<?= $i ?>vitesseMaximum50"><?= $persoDatas[${'idPersoJ'.$i}]->vitesseMaximum50 ?></li>
-                            <li id="player<?= $i ?>vitesseMinimum25"><?= $persoDatas[${'idPersoJ'.$i}]->vitesseMinimum25 ?></li>
-                            <li id="player<?= $i ?>vitesseMaximum25"><?= $persoDatas[${'idPersoJ'.$i}]->vitesseMaximum25 ?></li>
-                            <li id="player<?= $i ?>forceMinimum"><?= $persoDatas[${'idPersoJ'.$i}]->forceMinimum ?></li>
-                            <li id="player<?= $i ?>forceMaximum"><?= $persoDatas[${'idPersoJ'.$i}]->forceMaximum ?></li>
-                            <li id="player<?= $i ?>fatigueApresFrappeMinimum"><?= $persoDatas[${'idPersoJ'.$i}]->fatigueApresFrappeMinimum ?></li>
-                            <li id="player<?= $i ?>fatigueApresFrappeMaximum"><?= $persoDatas[${'idPersoJ'.$i}]->fatigueApresFrappeMaximum ?></li>
-                            <li id="player<?= $i ?>deApresFrappeMinimum"><?= $persoDatas[${'idPersoJ'.$i}]->deApresFrappeMinimum ?></li>
-                            <li id="player<?= $i ?>deApresFrappeMaximum"><?= $persoDatas[${'idPersoJ'.$i}]->deApresFrappeMaximum ?></li>
+                            <li class="d-none" id="player<?= $i ?>vitesseMinimum"><?= $persoDatas[${'idPersoJ'.$i}]->vitesseMinimum ?></li>
+                            <li class="d-none" id="player<?= $i ?>vitesseMaximum"><?= $persoDatas[${'idPersoJ'.$i}]->vitesseMaximum ?></li>
+                            <li class="d-none" id="player<?= $i ?>vitesseMinimum75"><?= $persoDatas[${'idPersoJ'.$i}]->vitesseMinimum75 ?></li>
+                            <li class="d-none" id="player<?= $i ?>vitesseMaximum75"><?= $persoDatas[${'idPersoJ'.$i}]->vitesseMaximum75 ?></li>
+                            <li class="d-none" id="player<?= $i ?>vitesseMinimum50"><?= $persoDatas[${'idPersoJ'.$i}]->vitesseMinimum50 ?></li>
+                            <li class="d-none" id="player<?= $i ?>vitesseMaximum50"><?= $persoDatas[${'idPersoJ'.$i}]->vitesseMaximum50 ?></li>
+                            <li class="d-none" id="player<?= $i ?>vitesseMinimum25"><?= $persoDatas[${'idPersoJ'.$i}]->vitesseMinimum25 ?></li>
+                            <li class="d-none" id="player<?= $i ?>vitesseMaximum25"><?= $persoDatas[${'idPersoJ'.$i}]->vitesseMaximum25 ?></li>
+                            <li class="d-none" id="player<?= $i ?>forceMinimum"><?= $persoDatas[${'idPersoJ'.$i}]->forceMinimum ?></li>
+                            <li class="d-none" id="player<?= $i ?>forceMaximum"><?= $persoDatas[${'idPersoJ'.$i}]->forceMaximum ?></li>
+                            <li class="d-none" id="player<?= $i ?>fatigueApresFrappeMinimum"><?= $persoDatas[${'idPersoJ'.$i}]->fatigueApresFrappeMinimum ?></li>
+                            <li class="d-none" id="player<?= $i ?>fatigueApresFrappeMaximum"><?= $persoDatas[${'idPersoJ'.$i}]->fatigueApresFrappeMaximum ?></li>
+                            <li class="d-none" id="player<?= $i ?>deApresFrappeMinimum"><?= $persoDatas[${'idPersoJ'.$i}]->deApresFrappeMinimum ?></li>
+                            <li class="d-none" id="player<?= $i ?>deApresFrappeMaximum"><?= $persoDatas[${'idPersoJ'.$i}]->deApresFrappeMaximum ?></li>
 
                         </ul>
                     </div>
@@ -49,7 +49,8 @@
                 <div id="dice">
                     <form action="#" method="post" id="the_dice">
                         <label>Lancer le dé</label>
-                        <input type="submit" value="lancer le dé" />
+                        <input type="submit" value="lancer le dé" /><br/>
+                        <img id="image_de" src="../assets/images/de/de_1.png"/>
                     </form>
                 </div>
             </div>

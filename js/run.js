@@ -168,7 +168,9 @@ console.log ('l info vie est = a ' + infosVie)
         let diceResult = run.getRandomInt(joueur.vitesseMin,joueur.vitesseMax);
         console.log("le dé renvoie" + diceResult);
 
-
+        let zoneDe = document.querySelector('#image_de')
+        console.log('la zone dé est ' + zoneDe.src)
+        zoneDe.src = '../assets/images/de/de_'+diceResult+'.png'
         
         // ! appeler la fonction qui fait avancer le personnage
         run.carMovement(diceResult, run.quelJoueurJoue-1)
@@ -243,7 +245,7 @@ console.log ('l info vie est = a ' + infosVie)
 
     },
 
-    moveInDom:function(newCurrentBox, objectCurrentPlayer, currentPlayer ) {
+ /*    moveInDom:function(newCurrentBox, objectCurrentPlayer, currentPlayer ) {
         const nouvelleCase = document.querySelector('#case'+newCurrentBox);
         const imgVoiture =  document.createElement('img')
         imgVoiture.src = '../assets/images/img_marqueurs/' + objectCurrentPlayer.couleurVoiture+'_vers_droite.png'
@@ -251,7 +253,7 @@ console.log ('l info vie est = a ' + infosVie)
         imgVoiture.style.height = '30px'
         nouvelleCase.appendChild(imgVoiture)
 
-    },
+    }, */
 
     frapperAdversaire: function (frappeMin, frappeMax) {
         let pointsDeFrappe = run.getRandomInt(frappeMin, frappeMax)
