@@ -5,6 +5,7 @@ const run = {
     quelJoueurJoue: 1,
     indicePlayer1: 0,
     indicePlayer2: 1,
+    
 
     
     init: function () {
@@ -52,7 +53,7 @@ const run = {
             "deApresFrappeMaximum" : dafMax,   
         }
 
-        return arrayInfosPersos      
+        return arrayInfosPersos 
     },
 
 
@@ -100,8 +101,14 @@ const run = {
         
         // le joueur courant qui est entrain de jouer
         let joueur = run.infosJoueur(run.quelJoueurJoue)
-        console.log(joueur)
+        console.log('la vie dans le handleDice =>' + joueur.vie)
 
+        //évalue la vie du joueur
+        // si < 75 et que le dé min > 0 => déMin-1
+
+        // si < 50 le dé max = -1
+
+        // si < 25 et le dé min > 0 => déMin -1 et dé max -1
         
        
         // ! lancer le dé en fonction de son min et max
@@ -112,11 +119,6 @@ const run = {
         
         // ! appeler la fonction qui fait avancer le personnage
         run.carMovement(diceResult, run.quelJoueurJoue-1)
-
-        // ! appeler la fonction qui compare si on est sur la meme case
-
-        // ! appeler la fonction  qui gère le combat si on est sur la même case
-
 
         // switch du toueur du joueur
         run.quelJoueurJoue = run.quelJoueurJoue == 1 ?  run.quelJoueurJoue = 2 :  run.quelJoueurJoue = 1
@@ -167,8 +169,8 @@ const run = {
             if (frapperAdversaire) {
                 let forceDuCoupDonne = run.frapperAdversaire(run.infosJoueur(currentPlayer).forceMin, run.infosJoueur(currentPlayer).forceMax)
                 console.log('la force du coup est de ' + forceDuCoupDonne)
-                run.prendreDegats(run.infosJoueur(opponent), forceDuCoupDonne)
-                run.prendreFatigue(run.infosJoueur(currentPlayer), run.infosJoueur(currentPlayer).fatigueApresFrappeMinimum, run.infosJoueur(currentPlayer).fatigueApresFrappeMaximum)
+                run.prendreDegats(run.infosJoueur(opponent), forceDuCoupDonne, opponent)
+                run.prendreFatigue(run.infosJoueur(currentPlayer), run.infosJoueur(currentPlayer).fatigueApresFrappeMinimum, run.infosJoueur(currentPlayer).fatigueApresFrappeMaximum, currentPlayer)
                 run.prendreBonus(run.infosJoueur(currentPlayer), run.infosJoueur(currentPlayer).deApresFrappeMinimum, run.infosJoueur(currentPlayer).deApresFrappeMaximum, playerIndex)
             }
         
@@ -186,16 +188,19 @@ const run = {
         return pointsDeFrappe
     },
 
-    prendreDegats: function(joueur, degats) {
+    prendreDegats: function(joueur, degats, playerNumber) {   
         let nouveauxPointsDeVie = joueur.vie - degats
         console.log('les nouveaux points de vie de ' + joueur.nomPerso + ' sont = ' + nouveauxPointsDeVie )
-       return nouveauxPointsDeVie
+        console.log('le index player id renvoie : #player'+playerNumber+'vie')
+        document.querySelector('#player'+playerNumber+'vie').innerHTML = nouveauxPointsDeVie
+        return nouveauxPointsDeVie
     },
 
-    prendreFatigue: function(joueur, fatigueMin, fatigueMax) {
+    prendreFatigue: function(joueur, fatigueMin, fatigueMax,playerNumber) {
         let calculFatigue = run.getRandomInt(fatigueMin, fatigueMax)
         let fatigueApresFrappe = joueur.vie - calculFatigue
         console.log('les nouveaux points de vie de ' + joueur.nomPerso + ' sont = ' + fatigueApresFrappe )
+        document.querySelector('#player'+playerNumber+'vie').innerHTML = fatigueApresFrappe
         return fatigueApresFrappe
     },
 
