@@ -27,6 +27,7 @@
                             <li id="player<?= $i ?>NomPerso"><?= $persoDatas[${'idPersoJ'.$i}]->name ?></li>
                             <li id="player<?= $i ?>Voiture" title="<?= ${'couleurVehiculeJ'.$i} ?>"> <img src="../assets/images/img_marqueurs/<?= ${'couleurVehiculeJ'.$i} ?>_vers_droite.png" alt="Voiture <?= ${'couleurVehiculeJ'.$i} ?>" height="30px"/></li>
                             <li id="player<?= $i ?>qualite"><?= $persoDatas[${'idPersoJ'.$i}]->qualite ?></li>
+                            <li id="player<?= $i ?>vie"><?= $persoDatas[${'idPersoJ'.$i}]->vie ?></li>
                             <li id="player<?= $i ?>vitesseMinimum"><?= $persoDatas[${'idPersoJ'.$i}]->vitesseMinimum ?></li>
                             <li id="player<?= $i ?>vitesseMaximum"><?= $persoDatas[${'idPersoJ'.$i}]->vitesseMaximum ?></li>
                             <li id="player<?= $i ?>forceMinimum"><?= $persoDatas[${'idPersoJ'.$i}]->forceMinimum ?></li>

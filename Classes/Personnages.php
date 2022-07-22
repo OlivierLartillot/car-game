@@ -6,6 +6,7 @@ class Personnages
     public $name;
     public $qualite;
     public $image_marqueur;
+    public $vie;
     public $vitesseMinimum;
     public $vitesseMaximum;
     public $forceMinimum;
@@ -16,11 +17,12 @@ class Personnages
     public $deApresFrappeMaximum;
 
 
-    public function __construct($name = 'default', string $qualite, string $image_marqueur, int $vitesseMinimum, int $vitesseMaximum, int $forceMinimum, int $forceMaximum, $fatigueApresFrappeMinimum, $fatigueApresFrappeMaximum, $deApresFrappeMinimum, $deApresFrappeMaximum)
+    public function __construct($name = 'default', string $qualite, string $image_marqueur,int $vie, int $vitesseMinimum, int $vitesseMaximum, int $forceMinimum, int $forceMaximum, $fatigueApresFrappeMinimum, $fatigueApresFrappeMaximum, $deApresFrappeMinimum, $deApresFrappeMaximum)
     {
         $this->name = $name;
         $this->qualite = $qualite;
         $this->image_marqueur = $image_marqueur;
+        $this->vie = $vie;
         $this->vitesseMinimum = $vitesseMinimum;
         $this->vitesseMaximum = $vitesseMaximum;
         $this->forceMinimum = $forceMinimum;

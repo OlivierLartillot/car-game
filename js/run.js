@@ -28,6 +28,7 @@ const run = {
   
         let nomPerso = document.querySelector('#player'+ idJoueur +'NomPerso').textContent
         let voiture = document.querySelector('#player'+ idJoueur +'Voiture').title
+        let viePerso = document.querySelector('#player'+ idJoueur +'vie').textContent
         let vMin = document.querySelector('#player'+ idJoueur +'vitesseMinimum').textContent
         let vMax = document.querySelector('#player'+ idJoueur +'vitesseMaximum').textContent
         let fMin = document.querySelector('#player'+ idJoueur +'forceMinimum').textContent
@@ -40,6 +41,7 @@ const run = {
         let arrayInfosPersos = {
             "nomPerso" : nomPerso , 
             "couleurVoiture" : voiture,
+            "vie" : viePerso,
             "vitesseMin" : vMin,
             "vitesseMax" : vMax,
             "forceMin" : fMin,
@@ -122,50 +124,77 @@ const run = {
 
     carMovement:function (diceResult, playerIndex) {
 
-        // numéro du joueur
-        playerNumber = playerIndex +1 
-
+        // le player index nous sert pour mettre à jour le tableau (casePlayer)
+        // numéro du joueur actif et adversaire player 1 / player2
+        const currentPlayer = playerIndex +1 
+        let opponent = 2
+        let opponentIndex = null
+        // de base on définit l'adversaire en player 2
+        // MAIS si le currentUser est le 2 
+        // adversaire est == 1 son index est donc 0
+        if (currentPlayer === 2) {
+            opponent = 1
+            opponentIndex = 0
+        }
+        else {
+            opponentIndex = 1
+        }
+        // case courante du currentUser
         let currentBox = run.casePlayer[playerIndex]
+        //adversaire 
+        let opponentCurrentBox = run.casePlayer[opponentIndex]
 
-        // supprime la voiture avec l id playerNumber
-        let el = document.querySelector('#imgVoitureJ' +playerNumber).remove();
+        // supprime la voiture avec l id currentPlayer
+        document.querySelector('#imgVoitureJ' +currentPlayer).remove();
 
-
-        console.log('l ancienne case a supprimer et qui possède l id : imgVoitureJ' +playerNumber )
-
-
-
-        console.log('la valeur est ' + currentBox);
-        // ajoute le dé
+        // ajoute le dé 
+        // le résultat est stocké dans une variable lisible
+        // c est le chiffre de la nouvelle case sur laquelle le joueur se trouve
         run.casePlayer[playerIndex] = currentBox + diceResult;
+        newCurrentBox = run.casePlayer[playerIndex]
 
-
-        
         // fait bouger la voiture
-        console.log('la nouvelle case est : ' + run.casePlayer[playerIndex])
-        const nouvelleCase = document.querySelector('#case'+run.casePlayer[playerIndex]);
-
+        const nouvelleCase = document.querySelector('#case'+newCurrentBox);
         const imgVoiture =  document.createElement('img')
-        imgVoiture.src = '../assets/images/img_marqueurs/' + run.infosJoueur(playerNumber).couleurVoiture+'_vers_droite.png'
-        imgVoiture.id = 'imgVoitureJ'+ playerNumber
+        imgVoiture.src = '../assets/images/img_marqueurs/' + run.infosJoueur(currentPlayer).couleurVoiture+'_vers_droite.png'
+        imgVoiture.id = 'imgVoitureJ'+ currentPlayer
         imgVoiture.style.height = '30px'
         nouvelleCase.appendChild(imgVoiture)
-/*         '<img id="imgVoitureJ'+ playerNumber + '" src="../assets/images/img_marqueurs/'+run.infosJoueur(playerNumber).couleurVoiture+'_vers_droite.png" alt="Voiture '+run.infosJoueur(playerNumber).couleurVoiture+'" height="30px"/>';
-     */    //nouvelleCase.appendChild(imgVoiture)   
-        console.log(nouvelleCase)
-        // attrape l'ancienne case
-        // annule la voiture dans l'ancienne case
-        //document.querySelector('#case'+currentBox).textContent = '0';
-        console.log('la case actuelle avant effacement est la ')
+
+        // Si je tombe sur la case de mon opposant j'ai le droit de le frapper
+        if (newCurrentBox === opponentCurrentBox) {
+            let frapperAdversaire = confirm('Tu es sur la même case que ton adversaire. Veux tu lui faire mordre la poussière ? Cela pourrait te coûter en énergie')
+            if (frapperAdversaire) {
+                let forceDuCoupDonne = run.frapperAdversaire(run.infosJoueur(currentPlayer).forceMin, run.infosJoueur(currentPlayer).forceMax)
+                console.log('la force du coup est de ' + forceDuCoupDonne)
+                run.prendreDegats(run.infosJoueur(opponent), forceDuCoupDonne)
+            }
+        
+        }
 
 
         // attrape la nouvelle case 
         // et affiches y la voiture
 
+    },
+
+    frapperAdversaire: function (frappeMin, frappeMax) {
+        let pointesDeFrappe = run.getRandomInt(frappeMin, frappeMax)
+        return pointesDeFrappe
+    },
+
+    prendreDegats: function(joueur, degats) {
+        let nouveauxPointsDeVie = joueur.vie - degats
+       return nouveauxPointsDeVie
+    },
+
+    prendreFatigue: function() {
+
+    },
+
+    prendreBonus: function() {
+
     }
-
-
-
 
 }
 
