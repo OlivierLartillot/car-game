@@ -6,6 +6,7 @@ const run = {
     indicePlayer1: 0,
     indicePlayer2: 1,
     playersInfosLife : [100,100],
+    caseArrivee: 104,
     
 
     
@@ -20,6 +21,7 @@ const run = {
         // place les voitures sur la case départ (0)
         run.caseActuelle( player1.couleurVoiture,player2.couleurVoiture)
 
+        
 
         let theDice = document.querySelector('#the_dice');
         theDice.addEventListener('submit', run.handleDice);
@@ -179,7 +181,9 @@ console.log ('l info vie est = a ' + infosVie)
 
         // le player index nous sert pour mettre à jour le tableau (casePlayer)
         // numéro du joueur actif et adversaire player 1 / player2
+
         const currentPlayer = playerIndex +1 
+        const objectCurrentPlayer = run.infosJoueur(currentPlayer)
         let opponent = 2
         let opponentIndex = null
         // de base on définit l'adversaire en player 2
@@ -192,6 +196,7 @@ console.log ('l info vie est = a ' + infosVie)
         else {
             opponentIndex = 1
         }
+
         // case courante du currentUser
         let currentBox = run.casePlayer[playerIndex]
         //adversaire 
@@ -206,30 +211,45 @@ console.log ('l info vie est = a ' + infosVie)
         run.casePlayer[playerIndex] = currentBox + diceResult;
         newCurrentBox = run.casePlayer[playerIndex]
 
+        if (newCurrentBox > run.caseArrivee) {
+            newCurrentBox = run.caseArrivee
+        }
+
+
         // fait bouger la voiture
         const nouvelleCase = document.querySelector('#case'+newCurrentBox);
         const imgVoiture =  document.createElement('img')
-        imgVoiture.src = '../assets/images/img_marqueurs/' + run.infosJoueur(currentPlayer).couleurVoiture+'_vers_droite.png'
+        imgVoiture.src = '../assets/images/img_marqueurs/' + objectCurrentPlayer.couleurVoiture+'_vers_droite.png'
         imgVoiture.id = 'imgVoitureJ'+ currentPlayer
         imgVoiture.style.height = '30px'
         nouvelleCase.appendChild(imgVoiture)
 
         // Si je tombe sur la case de mon opposant j'ai le droit de le frapper
         if (newCurrentBox === opponentCurrentBox) {
-            let frapperAdversaire = confirm('Tu es sur la même case que ton adversaire. Veux tu lui faire mordre la poussière ? Cela pourrait te coûter en énergie')
+            let frapperAdversaire = confirm(objectCurrentPlayer.nomPerso + ' ,tu es sur la même case que ton adversaire. Veux tu lui faire mordre la poussière ? Cela pourrait te coûter en énergie')
             if (frapperAdversaire) {
-                let forceDuCoupDonne = run.frapperAdversaire(run.infosJoueur(currentPlayer).forceMin, run.infosJoueur(currentPlayer).forceMax)
+                let forceDuCoupDonne = run.frapperAdversaire(objectCurrentPlayer.forceMin, objectCurrentPlayer.forceMax)
                 console.log('la force du coup est de ' + forceDuCoupDonne)
                 run.prendreDegats(run.infosJoueur(opponent), forceDuCoupDonne, opponent)
-                run.prendreFatigue(run.infosJoueur(currentPlayer), run.infosJoueur(currentPlayer).fatigueApresFrappeMinimum, run.infosJoueur(currentPlayer).fatigueApresFrappeMaximum, currentPlayer)
-                run.prendreBonus(run.infosJoueur(currentPlayer), run.infosJoueur(currentPlayer).deApresFrappeMinimum, run.infosJoueur(currentPlayer).deApresFrappeMaximum, playerIndex)
+                run.prendreFatigue(objectCurrentPlayer, objectCurrentPlayer.fatigueApresFrappeMinimum, objectCurrentPlayer.fatigueApresFrappeMaximum, currentPlayer)
+                run.prendreBonus(objectCurrentPlayer, objectCurrentPlayer.deApresFrappeMinimum, objectCurrentPlayer.deApresFrappeMaximum, playerIndex)
+
             }
         
         }
 
+        run.checkGameOver(run.infosJoueur(opponent))
+        run.checkArrivee(objectCurrentPlayer, newCurrentBox,currentPlayer)
 
-        // attrape la nouvelle case 
-        // et affiches y la voiture
+    },
+
+    moveInDom:function(newCurrentBox, objectCurrentPlayer, currentPlayer ) {
+        const nouvelleCase = document.querySelector('#case'+newCurrentBox);
+        const imgVoiture =  document.createElement('img')
+        imgVoiture.src = '../assets/images/img_marqueurs/' + objectCurrentPlayer.couleurVoiture+'_vers_droite.png'
+        imgVoiture.id = 'imgVoitureJ'+ currentPlayer
+        imgVoiture.style.height = '30px'
+        nouvelleCase.appendChild(imgVoiture)
 
     },
 
@@ -259,9 +279,30 @@ console.log ('l info vie est = a ' + infosVie)
         let calculBonus = run.getRandomInt(bonusFrappeMin, bonusFrappeMax)
         //ajout du nombre de case
         run.carMovement(calculBonus, playerIndex)
+    },
+
+    checkGameOver:function(joueur){
+        
+        if (joueur.vie <= 0) {
+                alert( joueur.nomPerso + " est gameOver")
+                window.location='http://localhost/car-game/'
+                die()
+            }
+    },
+
+    checkArrivee:function(joueur, caseJoueur,currentPlayer) {
+        if (caseJoueur >= run.caseArrivee) {
+
+            alert( joueur.nomPerso + " a franchi la ligne d'arrivée !!! ")
+            window.location='http://localhost/car-game/'
+            die()
+        }
     }
 
+
 }
+
+
 
 
 document.addEventListener('DOMContentLoaded', run.init);
