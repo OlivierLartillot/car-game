@@ -21,7 +21,7 @@
         <div class="panneau_de_jeu">
             <div class="ingame_players_board">
                 <?php for($i=1; $i<3; $i++) :?>
-                    <div class="player">
+                    <div class="player backgroundJ<?=$i?>">
                         <h2 id="player<?= $i ?>Name"><?= ${'nomJ'.$i} ?></h2>
                         <ul class="payerUl">
                             <li id="player<?= $i ?>NomPerso"><?= $persoDatas[${'idPersoJ'.$i}]->name ?></li>
@@ -48,7 +48,8 @@
                 <?php endfor; ?>
                 <div id="dice">
                     <form action="#" method="post" id="the_dice">
-                        <label>Lancer le dé</label>
+                        <label>Lancer le dé</label><br>
+                        <p id="infoTourJoueur"> C'est à <span class="white-grey"><?= $nomJ1 ?></span> de jeter le dé</p>
                         <input type="submit" value="lancer le dé" /><br/>
                         <img id="image_de" src="../assets/images/de/de_1.png"/>
                     </form>

@@ -48,14 +48,3 @@ require_once "../datas/tableau_couleurs_voitures.php";
 
     // récupérer les données des persos choisis
     // et passer le relai au js pour la course
-
-require_once "../datas/tableau_persos.php";
-
-//récupère l'id du perso
-foreach ($persoDatas[$idPersoJ1] as $currentObjectProperty) {
-    echo $currentObjectProperty . '<br/>'; 
-} 
-
-foreach ($persoDatas[$idPersoJ2] as $currentObjectProperty) {
-    echo $currentObjectProperty . '<br/>'; 
-} 

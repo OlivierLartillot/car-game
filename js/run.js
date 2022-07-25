@@ -175,8 +175,32 @@ console.log ('l info vie est = a ' + infosVie)
         // ! appeler la fonction qui fait avancer le personnage
         run.carMovement(diceResult, run.quelJoueurJoue-1)
 
+
+
+
         // switch du toueur du joueur
         run.quelJoueurJoue = run.quelJoueurJoue == 1 ?  run.quelJoueurJoue = 2 :  run.quelJoueurJoue = 1
+
+        //récupère le nom du joueur
+        let nomJoueur = document.querySelector('#player'+ run.quelJoueurJoue +'Name').textContent
+        // récupère le span infos cest au joueur a jouer
+        let infoTourJoueur = document.querySelector('#infoTourJoueur')
+        // récupère le background du joueur1
+        let backgroundJ1 = document.querySelector('.backgroundJ1')
+        let backgroundJ2 = document.querySelector('.backgroundJ2')
+        // récupère le background du joueur2
+
+        infoTourJoueur.innerHTML = 'c\'est a <span class="white-grey"> '+ nomJoueur + '</span> de lancer le dé'
+        console.log('voici le span : ' + infoTourJoueur)
+
+        if (run.quelJoueurJoue === 1 ){      
+            backgroundJ2.style.backgroundColor = "#EEEEEE"
+            backgroundJ1.style.backgroundColor = "greenyellow"
+        }
+        else {      
+            backgroundJ1.style.backgroundColor = "#EEEEEE"
+            backgroundJ2.style.backgroundColor = "greenyellow"
+        }
     },
 
     carMovement:function (diceResult, playerIndex) {
@@ -236,9 +260,10 @@ console.log ('l info vie est = a ' + infosVie)
                 run.prendreFatigue(objectCurrentPlayer, objectCurrentPlayer.fatigueApresFrappeMinimum, objectCurrentPlayer.fatigueApresFrappeMaximum, currentPlayer)
                 run.prendreBonus(objectCurrentPlayer, objectCurrentPlayer.deApresFrappeMinimum, objectCurrentPlayer.deApresFrappeMaximum, playerIndex)
 
-            }
-        
+            }        
         }
+
+
 
         run.checkGameOver(run.infosJoueur(opponent))
         run.checkArrivee(objectCurrentPlayer, newCurrentBox,currentPlayer)
