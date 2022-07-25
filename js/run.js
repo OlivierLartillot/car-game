@@ -162,7 +162,7 @@ const run = {
         }
        
 
-console.log ('l info vie est = a ' + infosVie)
+        console.log ('l info vie est = a ' + infosVie)
 
         // ! lancer le dé en fonction de son min et max
         let diceResult = run.getRandomInt(joueur.vitesseMin,joueur.vitesseMax);
@@ -231,16 +231,29 @@ console.log ('l info vie est = a ' + infosVie)
         // supprime la voiture avec l id currentPlayer
         document.querySelector('#imgVoitureJ' +currentPlayer).remove();
 
-        // ajoute le dé 
-        // le résultat est stocké dans une variable lisible
+
+
+
+
+        // ajoute le dé au tableau casePlayer
         // c est le chiffre de la nouvelle case sur laquelle le joueur se trouve
         run.casePlayer[playerIndex] = currentBox + diceResult;
+
+        // ajout du bonus
+        let bonusMalus = run.bonusMalus(bonusMalusCases,run.casePlayer[playerIndex])
+
+        run.casePlayer[playerIndex] = run.casePlayer[playerIndex] + bonusMalus
         newCurrentBox = run.casePlayer[playerIndex]
+
+        console.log("la new current box est la " + newCurrentBox)
 
         if (newCurrentBox > run.caseArrivee) {
             newCurrentBox = run.caseArrivee
         }
 
+
+/*         run.bonusMalus(malusCases,newCurrentBox)
+        run.bonusMalus(bonusVie,newCurrentBox) */
 
         // fait bouger la voiture
         const nouvelleCase = document.querySelector('#case'+newCurrentBox);
@@ -249,6 +262,9 @@ console.log ('l info vie est = a ' + infosVie)
         imgVoiture.id = 'imgVoitureJ'+ currentPlayer
         imgVoiture.style.height = '30px'
         nouvelleCase.appendChild(imgVoiture)
+
+
+
 
         // Si je tombe sur la case de mon opposant j'ai le droit de le frapper
         if (newCurrentBox === opponentCurrentBox) {
@@ -324,8 +340,18 @@ console.log ('l info vie est = a ' + infosVie)
             window.location='http://localhost/car-game/'
             die()
         }
-    }
+    },
 
+    // regarde dans le tab
+    bonusMalus:function (texteBonus, numeroDeLaCase) {
+        if (texteBonus.hasOwnProperty(numeroDeLaCase)) {
+
+                console.log("tu as un bonus")
+                console.log(texteBonus[numeroDeLaCase].texte + 'bonus + ' + texteBonus[numeroDeLaCase].bonus +  'bonusVie ' + texteBonus[numeroDeLaCase].bonusVie )
+            return texteBonus[numeroDeLaCase].bonus
+        }
+        return 0
+     },
 
 }
 

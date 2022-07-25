@@ -19,6 +19,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap" rel="stylesheet">
 	<script src="./js/app.js" defer></script> 
+	<script src="./datas/bonus.js" defer></script> 
 
 </head>
 <body>
