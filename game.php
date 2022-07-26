@@ -19,6 +19,17 @@
             <h1>Course en cours</h1>
             <img src="../assets/images/chequered-flag-icon.svg" alt="drapeau à damier" width="50">
         </div>
+        
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Some text in the Modal..</p>
+            </div>
+
+        </div>
         <div class="panneau_de_jeu">
             <div class="ingame_players_board">
                 <?php for($i=1; $i<3; $i++) :?>

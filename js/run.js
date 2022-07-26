@@ -13,7 +13,24 @@ const run = {
     init: function () {
         console.log('le run js est lancé');
         console.log('le player 1 est sur la case ' + run.casePlayer[run.indicePlayer1]);
-        
+
+        // couleur du background en fonction de:
+        // bonus: vert, malus: orange, ravito, bleu
+        // TODO: pour un jeu plus joli => petits icones dans un coin de la case
+        for (let i=0;i<=run.caseArrivee;i++) {
+                if (bonusMalusCases.hasOwnProperty(i)) {
+                    if(bonusMalusCases[i].bonus>0) {
+                        document.querySelector("#case"+i).style.backgroundColor = "green"
+                    }
+                    else if (bonusMalusCases[i].bonus<0) {
+                        document.querySelector("#case"+i).style.backgroundColor = "orange"                   
+                    }
+                }   
+                else if (bonusVie.hasOwnProperty(i)){
+                    document.querySelector("#case"+i).style.backgroundColor = "blue"
+                }
+        }
+
         // chargement des infos de chaque joueur
         let player1 = run.infosJoueur(1)
         let player2 = run.infosJoueur(2)
@@ -21,15 +38,17 @@ const run = {
         // place les voitures sur la case départ (0)
         run.caseActuelle( player1.couleurVoiture,player2.couleurVoiture)
 
-        
-
+        // auditeur sur le lancé du dé
         let theDice = document.querySelector('#the_dice');
         theDice.addEventListener('submit', run.handleDice);
+       
+        let closeModal = document.getElementsByClassName("close")[0];
+        closeModal.addEventListener('click', run.handleCloseModal);
+        
     },
 
-    infosJoueur:function(idJoueur) {
-        
-  
+    // les datas de base sont enregistrées dans un tableau php
+    infosJoueur:function(idJoueur) {  
         let nomPerso = document.querySelector('#player'+ idJoueur +'NomPerso').textContent
         let voiture = document.querySelector('#player'+ idJoueur +'Voiture').title
         let viePerso = document.querySelector('#player'+ idJoueur +'vie').textContent
@@ -96,15 +115,6 @@ const run = {
                 casedepart.innerHTML = imgVoitureJ1 + imgVoitureJ2;
             
         }
-
-/*         if (quelJoueur) {
-            console.log('hourra tu nes pas nulll = ' + quelJoueur)
-        }
-        console.log(quelJoueur) */
-
- 
-
-
     },
 
     getRandomInt: function (min, max) {
@@ -117,6 +127,7 @@ const run = {
         evt.preventDefault();
         
         // le joueur courant qui est entrain de jouer
+        //on récupère quelques infos qui vont nous servir
         let joueur = run.infosJoueur(run.quelJoueurJoue)
         let playerNumber = run.quelJoueurJoue
         let playerIndex = playerNumber - 1
@@ -207,20 +218,16 @@ const run = {
 
         // le player index nous sert pour mettre à jour le tableau (casePlayer)
         // numéro du joueur actif et adversaire player 1 / player2
-
         const currentPlayer = playerIndex +1 
         const objectCurrentPlayer = run.infosJoueur(currentPlayer)
         let opponent = 2
-        let opponentIndex = null
+        let opponentIndex = 1
         // de base on définit l'adversaire en player 2
         // MAIS si le currentUser est le 2 
         // adversaire est == 1 son index est donc 0
         if (currentPlayer === 2) {
             opponent = 1
             opponentIndex = 0
-        }
-        else {
-            opponentIndex = 1
         }
 
         // case courante du currentUser
@@ -230,10 +237,6 @@ const run = {
 
         // supprime la voiture avec l id currentPlayer
         document.querySelector('#imgVoitureJ' +currentPlayer).remove();
-
-
-
-
 
         // ajoute le dé au tableau casePlayer
         // c est le chiffre de la nouvelle case sur laquelle le joueur se trouve
@@ -251,20 +254,13 @@ const run = {
             newCurrentBox = run.caseArrivee
         }
 
-
-/*         run.bonusMalus(malusCases,newCurrentBox)
-        run.bonusMalus(bonusVie,newCurrentBox) */
-
-        // fait bouger la voiture
+        // fait bouger l'image de la voiture
         const nouvelleCase = document.querySelector('#case'+newCurrentBox);
         const imgVoiture =  document.createElement('img')
         imgVoiture.src = '../assets/images/img_marqueurs/' + objectCurrentPlayer.couleurVoiture+'_vers_droite.png'
         imgVoiture.id = 'imgVoitureJ'+ currentPlayer
         imgVoiture.style.height = '30px'
         nouvelleCase.appendChild(imgVoiture)
-
-
-
 
         // Si je tombe sur la case de mon opposant j'ai le droit de le frapper
         if (newCurrentBox === opponentCurrentBox) {
@@ -278,8 +274,6 @@ const run = {
 
             }        
         }
-
-
 
         run.checkGameOver(run.infosJoueur(opponent))
         run.checkArrivee(objectCurrentPlayer, newCurrentBox,currentPlayer)
@@ -348,10 +342,20 @@ const run = {
 
                 console.log("tu as un bonus")
                 console.log(texteBonus[numeroDeLaCase].texte + 'bonus + ' + texteBonus[numeroDeLaCase].bonus +  'bonusVie ' + texteBonus[numeroDeLaCase].bonusVie )
+            
+                // TODO: AJOUTER dans le modal 
+                document.querySelector('.modal').style.display = "block"
+                document.querySelector('.modal-content>p').textContent = texteBonus[numeroDeLaCase].texte + texteBonus[numeroDeLaCase].bonus
+                
+                
             return texteBonus[numeroDeLaCase].bonus
         }
         return 0
      },
+
+     handleCloseModal:function() {
+        document.querySelector('.modal').style.display = "none" 
+     }
 
 }
 
