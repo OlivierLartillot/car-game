@@ -19,14 +19,14 @@
             <h1>Course en cours</h1>
             <img src="../assets/images/chequered-flag-icon.svg" alt="drapeau à damier" width="50">
         </div>
-        
+
         <!-- The Modal -->
         <div id="myModal" class="modal">
 
             <!-- Modal content -->
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <p>Some text in the Modal..</p>
+                <p>C'est à <?= $nomJ1 ?> de commencer</p>
             </div>
 
         </div>
