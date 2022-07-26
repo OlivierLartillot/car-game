@@ -243,7 +243,7 @@ const run = {
         run.casePlayer[playerIndex] = currentBox + diceResult;
 
         // ajout du bonus
-        let bonusMalus = run.bonusMalus(bonusMalusCases,run.casePlayer[playerIndex])
+        let bonusMalus = run.bonusMalus(bonusMalusCases,run.casePlayer[playerIndex], objectCurrentPlayer.nomPerso)
 
         run.casePlayer[playerIndex] = run.casePlayer[playerIndex] + bonusMalus
         newCurrentBox = run.casePlayer[playerIndex]
@@ -337,15 +337,15 @@ const run = {
     },
 
     // regarde dans le tab
-    bonusMalus:function (texteBonus, numeroDeLaCase) {
+    bonusMalus:function (texteBonus, numeroDeLaCase, nomJoueur) {
         if (texteBonus.hasOwnProperty(numeroDeLaCase)) {
 
                 console.log("tu as un bonus")
                 console.log(texteBonus[numeroDeLaCase].texte + 'bonus + ' + texteBonus[numeroDeLaCase].bonus +  'bonusVie ' + texteBonus[numeroDeLaCase].bonusVie )
-            
-                // TODO: AJOUTER dans le modal 
+                
+                // Lance l'information dans la boite modale
                 document.querySelector('.modal').style.display = "block"
-                document.querySelector('.modal-content>p').textContent = texteBonus[numeroDeLaCase].texte + texteBonus[numeroDeLaCase].bonus
+                document.querySelector('.modal-content>p').textContent = nomJoueur + ": " + texteBonus[numeroDeLaCase].texte + texteBonus[numeroDeLaCase].bonus
                 
                 
             return texteBonus[numeroDeLaCase].bonus
